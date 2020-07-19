@@ -8,6 +8,7 @@ class Client (models.Model):
 
     address = models.CharField(max_length=255)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    
     class Meta:
         verbose_name="Cliente"
         verbose_name_plural = "Clientes"
