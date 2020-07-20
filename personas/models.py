@@ -5,7 +5,6 @@ from django.db import models
 # Create your models here.
 class Client (models.Model):
     phone = models.BigIntegerField()
-
     address = models.CharField(max_length=255)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     
