@@ -11,7 +11,7 @@ class Category (models.Model):
     name = models.CharField(max_length=50)
     icon = models.ImageField(upload_to = "image_categories")
     description = models.TextField()
-    slug = models.CharField(max_length=250, blank=True, null=True)
+    slug = models.SlugField(max_length=250, blank=True, null=True)
     parent = models.CharField(max_length=250)
 
     class Meta:
