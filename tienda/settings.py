@@ -124,3 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = str(BASE_DIR) + '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR) + '/media/'

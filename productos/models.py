@@ -1,18 +1,27 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.text import slugify
+
+
 class Category (models.Model):
     name = models.CharField(max_length=50)
-    icon = models.ImageField(upload_to = None, height_field = None, width_field = None, max_length = 100)
+    icon = models.ImageField(upload_to = "image_categories")
     description = models.TextField()
-    slug = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250, blank=True, null=True)
     parent = models.CharField(max_length=250)
 
     class Meta:
         verbose_name="Categoria"
         verbose_name_plural = "Categorias"
+
     def __str__(self):
-        return self.user.username
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
 class Unit (models.Model):
     name = models.CharField(max_length=50)
