@@ -1,18 +1,15 @@
 from django.db import models
-
 # Create your models here.
 from django.utils.text import slugify
-
-
 from empresas.models import Shop
 
 
 class Category (models.Model):
     name = models.CharField(max_length=50)
     icon = models.ImageField(upload_to = "image_categories")
-    description = models.TextField()
-    slug = models.SlugField(max_length=250, blank=True, null=True)
-    parent = models.CharField(max_length=250)
+    description = models.TextField(blank=True)
+    slug = models.SlugField(max_length=255, blank=True, unique=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name="Categoria"
@@ -28,7 +25,7 @@ class Category (models.Model):
 
 class Unit (models.Model):
     name = models.CharField(max_length=50)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     class Meta:
         verbose_name="Unidad"
         verbose_name_plural = "Unidades"
@@ -38,11 +35,11 @@ class Unit (models.Model):
 
 class Product (models.Model):
     name = models.CharField(max_length=50)
-    photo = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
-    description = models.TextField()
+    photo = models.ImageField(upload_to='foto_producto')
+    description = models.TextField(blank=True)
     valor = models.IntegerField()
     quantity = models.IntegerField()
-    discount = models.IntegerField()
+    discount = models.IntegerField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     unidades = models.ForeignKey(Unit, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
