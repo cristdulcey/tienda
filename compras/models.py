@@ -43,7 +43,7 @@ class Notification (models.Model):
         verbose_name_plural = "Notificaciones"
 
     def __str__(self):
-        return "Id shop {}, Id staff {}, Id order {}".format(self.id_shop, self.id_staff, self.id_order)
+        return "Id shop {}, Id staff {}, Id order {}".format(self.shop, self.staff, self.order)
 
 
 class OrderProduct (models.Model):
