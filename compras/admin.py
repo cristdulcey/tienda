@@ -12,6 +12,7 @@ class AdminCupon(admin.ModelAdmin):
     search_fields = ("category__name",)
     list_filter = ("category",)
 
+
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):
     pass
