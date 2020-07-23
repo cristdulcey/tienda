@@ -6,7 +6,11 @@ from compras.models import Cupon, Order, Notification, OrderProduct
 
 @admin.register(Cupon)
 class AdminCupon(admin.ModelAdmin):
-    pass
+    list_display = ("name","code")
+    list_display_links = ("name","code")
+    raw_id_fields = ("category","shop")
+    search_fields = ("category__name",)
+    list_filter = ("category",)
 
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):

@@ -6,7 +6,7 @@ class Shop(models.Model):
     nit=models.BigIntegerField()
     address=models.CharField(max_length=255)
     phone=models.BigIntegerField()
-    logo=models.CharField(max_length=255)
+    logo=models.ImageField(upload_to="shop_image", null=True, blank=True)
     description=models.TextField(max_length=255)
     state=models.BooleanField(default=True)
 
