@@ -9,7 +9,7 @@ class Category (models.Model):
     icon = models.ImageField(upload_to = "image_categories")
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=255, blank=True, unique=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name="Categoria"

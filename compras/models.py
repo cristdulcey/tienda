@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 from empresas.models import Shop
-from personas.models import Client
+from personas.models import Client, Staff
+from productos.models import Category, Product
 
 
 class Cupon(models.Model):
@@ -11,8 +12,8 @@ class Cupon(models.Model):
     percent=models.BigIntegerField()
     max_number=models.IntegerField()
     min_value=models.IntegerField()
-    #id_category=models.ForeignKey(Category, on_delete=models.CASCADE)
-    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    category=models.ForeignKey(Category, on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name="Cupon"
@@ -24,7 +25,7 @@ class Order(models.Model):
     date=models.DateField(auto_now=True, auto_now_add=False)
     value=models.IntegerField()
     state=models.BooleanField(default=True)
-    id_client=models.ForeignKey(Client, on_delete=models.CASCADE)
+    client=models.ForeignKey(Client, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name="Orden"
@@ -33,9 +34,9 @@ class Order(models.Model):
         return self.date
 
 class Notification (models.Model):
-    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    #id_staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    id_order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Notificacion"
@@ -46,7 +47,7 @@ class Notification (models.Model):
 
 
 class OrderProduct (models.Model):
-    #id_producto=models.ForeignKey(Product, on_delete=models.CASCADE)
+    id_producto=models.ForeignKey(Product, on_delete=models.CASCADE)
     id_order=models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity=models.IntegerField()
     velue_unit=models.BigIntegerField()
