@@ -19,6 +19,7 @@ class AdminOrder(admin.ModelAdmin):
 
 @admin.register(Notification)
 class AdminNotification(admin.ModelAdmin):
+    
     list_display = ("shop", "order", "staff")
     list_display_links = ("shop", "order", "staff")
     raw_id_fields = ("shop", "staff","order")
