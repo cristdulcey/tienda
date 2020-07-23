@@ -18,7 +18,11 @@ class AdminOrder(admin.ModelAdmin):
 
 @admin.register(Notification)
 class AdminNotification(admin.ModelAdmin):
-    pass
+    list_display = ("shop", "order", "staff")
+    list_display_links = ("shop", "order", "staff")
+    raw_id_fields = ("shop", "staff","order")
+    search_fields = ("shop__name",)
+    list_filter = ("shop",)
 
 @admin.register(OrderProduct)
 class AdminOrderProduct(admin.ModelAdmin):
