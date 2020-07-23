@@ -6,4 +6,8 @@ from empresas.models import Shop
 
 @admin.register(Shop)
 class AdminShop(admin.ModelAdmin):
-    pass
+    list_display = ["name", "nit", "address", "state"]
+    list_display_links = ["name", "nit", "address"]
+    raw_id_fields = []
+    search_fields = ["name", "nit"]
+    list_filter = ["state"]
