@@ -37,3 +37,4 @@ class AdminOrderProduct(admin.ModelAdmin):
     raw_id_fields = ("order", "product")
     search_fields = ("product__name", "order__id")
     
+    
