@@ -25,6 +25,5 @@ class Staff (models.Model):
     send_notification = models.CharField(max_length=255)
     class Meta:
         verbose_name = "Personal"
-        verbose_name_plural = "Personal"
     def __str__(self):
         return self.type
