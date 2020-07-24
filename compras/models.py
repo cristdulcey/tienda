@@ -30,8 +30,9 @@ class Order(models.Model):
     class Meta:
         verbose_name="Orden"
         verbose_name_plural = "Ordenes"
+
     def __str__(self):
-        return self.date
+        return "{}".format(self.client)
 
 class Notification (models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
@@ -47,8 +48,8 @@ class Notification (models.Model):
 
 
 class OrderProduct (models.Model):
-    id_producto=models.ForeignKey(Product, on_delete=models.CASCADE)
-    id_order=models.ForeignKey(Order, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Product, on_delete=models.CASCADE)
+    order=models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity=models.IntegerField()
     velue_unit=models.BigIntegerField()
     value_total=models.BigIntegerField()
