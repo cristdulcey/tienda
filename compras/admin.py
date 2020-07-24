@@ -15,7 +15,11 @@ class AdminCupon(admin.ModelAdmin):
 
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):
-    pass
+    list_display = ("date", "state")
+    list_display_links = ("date", "state")
+    raw_id_fields = ("category", "shop")
+    search_fields = ("date","name")
+    list_filter = ("state","client__name")
 
 @admin.register(Notification)
 class AdminNotification(admin.ModelAdmin):
@@ -28,4 +32,8 @@ class AdminNotification(admin.ModelAdmin):
 
 @admin.register(OrderProduct)
 class AdminOrderProduct(admin.ModelAdmin):
-    pass
+    list_display = ("quantity", "value_unit","value_total")
+    list_display_links = ("quantity", "value_unit","value_total")
+    raw_id_fields = ("order", "product")
+    search_fields = ("product__name", "order__id")
+    
