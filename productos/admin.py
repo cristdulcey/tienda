@@ -19,6 +19,11 @@ class AdminCategory(admin.ModelAdmin):
     list_filter = ("name",)
     inlines = [CuponInline,]
 
+class ProductInlines(admin.StackedInline):
+    model = Product
+    extra = 0
+    raw_id_fields = ("category","shop")
+
 @admin.register(Unit)
 class AdminUnit(admin.ModelAdmin):
     list_display = ("name","description")
@@ -26,6 +31,7 @@ class AdminUnit(admin.ModelAdmin):
     #raw_id_fields = ("name",)
     search_fields = ("name",)
     list_filter = ("name",)
+    inlines = [ProductInlines]
 
 @admin.register(Product)
 class AdminProduct(admin.ModelAdmin):
