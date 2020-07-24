@@ -17,9 +17,9 @@ class AdminCupon(admin.ModelAdmin):
 class AdminOrder(admin.ModelAdmin):
     list_display = ("date", "state")
     list_display_links = ("date", "state")
-    raw_id_fields = ("category", "shop")
+    raw_id_fields = ("client",)
     search_fields = ("date","name")
-    list_filter = ("state","client__name")
+    list_filter = ("state","client__user__first_name","client__user__last_name")
 
 @admin.register(Notification)
 class AdminNotification(admin.ModelAdmin):

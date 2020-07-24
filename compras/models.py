@@ -48,10 +48,10 @@ class Notification (models.Model):
 
 
 class OrderProduct (models.Model):
-    producto=models.ForeignKey(Product, on_delete=models.CASCADE)
+    product=models.ForeignKey(Product, on_delete=models.CASCADE)
     order=models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity=models.IntegerField()
-    velue_unit=models.BigIntegerField()
+    value_unit=models.BigIntegerField()
     value_total=models.BigIntegerField()
 
     class Meta:
