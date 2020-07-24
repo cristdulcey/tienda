@@ -13,6 +13,7 @@ class AdminCupon(admin.ModelAdmin):
     list_filter = ("category",)
 
 
+
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):
     list_display = ("date", "state")
