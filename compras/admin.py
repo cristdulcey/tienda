@@ -13,14 +13,14 @@ class AdminCupon(admin.ModelAdmin):
     list_filter = ("category",)
 
 class NotificationInline(admin.StackedInline):#CompactInline, TabularInline
-    model = Cupon
+    model = Notification
     extra = 0
-    raw_id_fields = ("shop",)
+    raw_id_fields = ("shop","staff","order")
 
 class OrderProductInline(admin.StackedInline):#CompactInline, TabularInline
-    model = Cupon
+    model = OrderProduct
     extra = 0
-    raw_id_fields = ("shop",)
+    raw_id_fields = ("order","product")
 
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):
