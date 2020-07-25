@@ -2,14 +2,19 @@ from django.contrib import admin
 
 # Register your models here.
 from productos.models import Category, Unit, Product
-from compras.models import Cupon
+from compras.models import Cupon, OrderProduct
 from jet.admin import CompactInline
 from empresas.admin import ProductInline
 
 class CuponInline(admin.StackedInline):#CompactInline, TabularInline
     model = Cupon
     extra = 0
-    raw_id_fields = ("shop","category")
+    raw_id_fields = ("shop","category",)
+
+class OrderProductInline(admin.StackedInline):#CompactInline, TabularInline
+    model = OrderProduct
+    extra = 0
+    raw_id_fields = ("order","product",)
 
 @admin.register(Category)
 class AdminCategory(admin.ModelAdmin):
@@ -36,3 +41,4 @@ class AdminProduct(admin.ModelAdmin):
     raw_id_fields = ("category","unidades")
     search_fields = ("name",)
     list_filter = ("category",)
+    inlines = [OrderProductInline,]
