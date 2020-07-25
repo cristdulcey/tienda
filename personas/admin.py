@@ -11,8 +11,8 @@ class OrderInlines(admin.StackedInline):
 
 @admin.register(Client)
 class AdminClient(admin.ModelAdmin):
-    list_display = ("user", "phone")
-    list_display_links = ("user", "phone")
+    list_display = ("get_full_name_client", "phone")
+    list_display_links = ("get_full_name_client", "phone")
     raw_id_fields = ("user",)
     search_fields = ("phone",)
     list_filter = ("user",)

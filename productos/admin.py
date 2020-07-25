@@ -46,9 +46,19 @@ class AdminUnit(admin.ModelAdmin):
 
 @admin.register(Product)
 class AdminProduct(admin.ModelAdmin):
-    list_display = ("name","valor","quantity","category")
-    list_display_links = ("name","valor","quantity","category")
+    list_display = ("name","value","quantity","category")
+    list_display_links = ("name","value","quantity","category")
     raw_id_fields = ("category","unidades","shop")
     search_fields = ("name",)
     list_filter = ("category",)
     inlines = [OrderProductInline,]
+    actions = ("set_value_product",)
+    ordering = ("-name",)
+    readonly_fields = ("quantity",)
+    def set_value_product(self,request,queryset):
+        for a in queryset:
+            a.value = 1000
+            a.save()
+            self.message_user(request, '{} {} {}'.format("Producto", a.name,"ha sido actualizado"))
+
+    set_value_product.short_description = "Poner precio $1000"
