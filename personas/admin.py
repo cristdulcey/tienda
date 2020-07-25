@@ -1,8 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
+from compras.models import Order
 from personas.models import Client, Staff
 
+class OrderInlines(admin.StackedInline):
+    model = Order
+    extra = 0
 
 @admin.register(Client)
 class AdminClient(admin.ModelAdmin):
@@ -11,6 +15,7 @@ class AdminClient(admin.ModelAdmin):
     raw_id_fields = ("user",)
     search_fields = ("phone",)
     list_filter = ("user",)
+    inlines = [OrderInlines,]
 
 @admin.register(Staff)
 class AdminStaff(admin.ModelAdmin):
