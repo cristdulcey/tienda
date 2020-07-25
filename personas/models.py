@@ -16,6 +16,13 @@ class Client (models.Model):
         verbose_name_plural = "Clientes"
     def __str__(self):
         return self.user.username
+    def get_full_name_client(self):
+        if self.user.get_full_name() == None or self.user.get_full_name() == "":
+            return "no tiene nombre"
+        else:
+            return self.user.get_full_name()
+
+    get_full_name_client.short_description = "Nombres"
 
 class Staff (models.Model):
     phone = models.BigIntegerField()

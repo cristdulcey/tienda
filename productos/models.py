@@ -37,7 +37,7 @@ class Product (models.Model):
     name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to='foto_producto')
     description = models.TextField(blank=True)
-    valor = models.IntegerField()
+    value = models.IntegerField()
     quantity = models.IntegerField()
     discount = models.IntegerField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
