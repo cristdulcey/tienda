@@ -12,6 +12,15 @@ class AdminCupon(admin.ModelAdmin):
     search_fields = ("category__name",)
     list_filter = ("category",)
 
+class NotificationInline(admin.StackedInline):#CompactInline, TabularInline
+    model = Cupon
+    extra = 0
+    raw_id_fields = ("shop",)
+
+class OrderProductInline(admin.StackedInline):#CompactInline, TabularInline
+    model = Cupon
+    extra = 0
+    raw_id_fields = ("shop",)
 
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):
@@ -20,6 +29,7 @@ class AdminOrder(admin.ModelAdmin):
     raw_id_fields = ("client",)
     search_fields = ("date","name")
     list_filter = ("state","client__user__first_name","client__user__last_name")
+    inlines = [NotificationInline, OrderProductInline]
 
 @admin.register(Notification)
 class AdminNotification(admin.ModelAdmin):
