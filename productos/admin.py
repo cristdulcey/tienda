@@ -10,6 +10,11 @@ class CuponInline(admin.StackedInline):#CompactInline, TabularInline
     extra = 0
     raw_id_fields = ("shop",)
 
+class ProductInline(admin.StackedInline):
+    model = Product
+    extra = 0
+    raw_id_fields = ("unidades","shop")
+
 @admin.register(Category)
 class AdminCategory(admin.ModelAdmin):
     list_display = ("name",)
@@ -17,7 +22,8 @@ class AdminCategory(admin.ModelAdmin):
     raw_id_fields = ("parent",)
     search_fields = ("name",)
     list_filter = ("name",)
-    inlines = [CuponInline,]
+    inlines = (CuponInline,ProductInline)
+
 
 @admin.register(Unit)
 class AdminUnit(admin.ModelAdmin):
@@ -31,6 +37,6 @@ class AdminUnit(admin.ModelAdmin):
 class AdminProduct(admin.ModelAdmin):
     list_display = ("name","valor","quantity","category")
     list_display_links = ("name","valor","quantity","category")
-    raw_id_fields = ("category","unidades")
+    raw_id_fields = ("category","unidades","shop")
     search_fields = ("name",)
     list_filter = ("category",)

@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from personas.models import Client, Staff
 
+from personas.models import Client, Staff
 
 @admin.register(Client)
 class AdminClient(admin.ModelAdmin):
