@@ -16,6 +16,11 @@ class OrderProductInline(admin.StackedInline):#CompactInline, TabularInline
     extra = 0
     raw_id_fields = ("order","product",)
 
+class ProductInline(admin.StackedInline):
+    model = Product
+    extra = 0
+    raw_id_fields = ("unidades","shop")
+
 @admin.register(Category)
 class AdminCategory(admin.ModelAdmin):
     list_display = ("name",)
@@ -43,7 +48,7 @@ class AdminUnit(admin.ModelAdmin):
 class AdminProduct(admin.ModelAdmin):
     list_display = ("name","valor","quantity","category")
     list_display_links = ("name","valor","quantity","category")
-    raw_id_fields = ("category","unidades")
+    raw_id_fields = ("category","unidades","shop")
     search_fields = ("name",)
     list_filter = ("category",)
     inlines = [OrderProductInline,]
