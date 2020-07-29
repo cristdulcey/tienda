@@ -1,8 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from empresas.models import Shop
-from personas.models import Client, Staff
+from empresas.models import Shop, Client, Staff
 from productos.models import Category, Product
 
 

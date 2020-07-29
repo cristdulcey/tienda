@@ -21,9 +21,6 @@ class ProductInline(admin.StackedInline):
     extra = 0
     raw_id_fields = ("unidades","shop")
 
-
-
-
 @admin.register(Category)
 class AdminCategory(admin.ModelAdmin):
     list_display = ("name",)

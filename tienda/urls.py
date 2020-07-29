@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from personas.views import TestView
+from empresas.views import TestView
 
 urlpatterns = [
 
