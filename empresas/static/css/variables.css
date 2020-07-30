@@ -1,0 +1,23 @@
+:root {
+	--bgColor: rgb(247, 247, 247);
+    --green: rgb(0, 158, 127);
+    --darkGreen: #8ba140;
+    --yellow: #f4c700;
+    --negroClaro: #363636;
+    --lightYellow: #f3d428;
+    --darkBlue: rgb(13, 17, 54);
+    --red:#ee2e32;
+    --lightGray: rgb(119, 121, 140);
+    --grayBorder: rgb(243, 243, 243);
+    --orange: rgb(255, 173, 94);
+    --textBlue: rgb(66, 69, 97);
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight:700;
+}
