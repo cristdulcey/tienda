@@ -1,16 +1,363 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" id="app">
 <head>
-    <meta charset="UTF-8">
-    <title>Loducode dev junior</title>
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scallable=no">
+	<title>Base Project</title>
+	<!-- TIPO -->
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700;2,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+	<!-- BOOTSTRAP CSS -->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+	<!-- ANIMATIONS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animations.css' %}">
+	<!-- OWN STYLES -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/variables.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
 </head>
 <body>
-    <h1>{{mensaje}} {{request.user}}</h1>
-    <h2>{{view.saludo}}</h2>
-    <h3>Mauricio leal garcia</h3>
-    <h3>Linda Patarroyo</h3>
-    <h3>Laura parrado villalobos</h3>
-    <h3>julian lara</h3>
-    <h3>Camilo Suarez</h3>
+
+	<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+		<a class="navbar-brand" href="#">
+			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDkuMTI0IiBoZWlnaHQ9IjE4Ij48ZyBkYXRhLW5hbWU9Ikdyb3VwIDI4MjkiPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCAyNjkwIiBkPSJNMCAuNjUybDIuMDcyLjAyNkMzLjgxNC42OTkgNS41NjMuNjI3IDcuMjk2Ljc2M2E1LjIgNS4yIDAgMDE0LjggNC4xNjEgNS4yMjIgNS4yMjIgMCAwMS00LjQyMyA2LjQ4NCAyMS42NjIgMjEuNjYyIDAgMDEtMy40MjIuMTE3Yy0uMzkzIDAtLjQ4Ni4xMjQtLjQ4Mi41LjAxOSAxLjcuMDA4IDMuNDA2LjAwOCA1LjEwOXYuNTM0SDB6bTMuODMyIDcuNjY5Yy40NyAwIC45LjAxNyAxLjMxOCAwYTEwLjQ0OSAxMC40NDkgMCAwMDEuNzgxLS4xNTMgMS45NDQgMS45NDQgMCAwMDEuNTI3LTEuOTUgMS45NzQgMS45NzQgMCAwMC0xLjI5My0yLjA0IDEwLjc0OCAxMC43NDggMCAwMC0zLjMzMi0uMjI5eiIgZmlsbD0iIzBkMTEzNiIvPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCAyNjkxIiBkPSJNMTA5LjEyNCA5LjM2YTQuMjY5IDQuMjY5IDAgMDAtMi4wMTMtLjAxOSAyLjUyMSAyLjUyMSAwIDAwLTEuOSAyLjQzMWMtLjA2OSAxLjc0MS0uMDQ3IDMuNDg1LS4wNjMgNS4yMjd2LjYyN2gtMy41ODFWNS44MDRoMy40NjZ2MS40MjVhMy4yNjYgMy4yNjYgMCAwMTIuMzQ5LTEuNDc3IDEwLjk0NiAxMC45NDYgMCAwMTEuNzQuMDEzeiIgZmlsbD0iIzAwOGQ3MSIvPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCAyNjkyIiBkPSJNNDguODIzLjY3OGguNTE2YzIuMjM2LjAyIDQuNDc4LS4wNjQgNi43LjA4OWE0LjQxMiA0LjQxMiAwIDAxNC4yODMgMy41ODUgMy44NzYgMy44NzYgMCAwMS0yLjE4MiA0LjQyNS40LjQgMCAwMC0uMDg5LjA2IDExLjAyOCAxMS4wMjggMCAwMTEuNTE1LjkyOSA0LjMzOSA0LjMzOSAwIDAxLjc2NCA1LjQzMSA0Ljc2MSA0Ljc2MSAwIDAxLTQuMTk1IDIuNDI1Yy0yLjM5My4wODQtNC43OTEuMDI3LTcuMTg3LjAzYS41NDYuNTQ2IDAgMDEtLjEzLS4wMzh6bTMuNjYzIDEzLjloMi4xYTcuMDgzIDcuMDgzIDAgMDAuOC0uMDMzIDEuOTMyIDEuOTMyIDAgMDAxLjgxLTEuOCAxLjgxNiAxLjgxNiAwIDAwLTEuNDA2LTJjLTEuMDc4LS4xNjQtMi4xODQtLjE1NS0zLjMwNS0uMjIyem0wLTcuMWMuNzU5IDAgMS40ODguMDE5IDIuMjE2LS4wMDlhMy4xMTkgMy4xMTkgMCAwMC45My0uMTkzIDEuNjUgMS42NSAwIDAwMS4wOTItMS42ODUgMS41NjcgMS41NjcgMCAwMC0xLjIxLTEuNjM0Yy0uOTg3LS4xNi0yLS4xNTktMy4wMjgtLjIyOXoiIGZpbGw9IiMwMDhkNzEiLz48cGF0aCBkYXRhLW5hbWU9IlBhdGggMjY5MyIgZD0iTTM4LjQ1OCA5LjY4NmMuODQ4LS45MzUgMS43NjEtMS44MiAyLjUyNS0yLjgxOWEyLjU0OCAyLjU0OCAwIDAxMi41LTEuMTE0YzEuMDI1LjEgMi4wNjYuMDIxIDMuMjA4LjAyMWwtNC42MzQgNC45ODIgNC43MzQgNi45Yy0xLjMgMC0yLjUxOS0uMDMtMy43MzcuMDE0YTEuMDY5IDEuMDY5IDAgMDEtMS4wOC0uNTc3Yy0uNzY0LTEuMjE0LTEuNTgzLTIuMzkzLTIuNDE2LTMuNjM5LS40LjQzNi0uNzgxLjgzNi0xLjEzOCAxLjI1OC0uMDcxLjA4NC0uMDU4LjI1Mi0uMDU5LjM4MnYyLjUzNmgtMy41NjdWLjM1OGgzLjU1NHY5LjN6IiBmaWxsPSIjMGQxMTM2Ii8+PHBhdGggZGF0YS1uYW1lPSJQYXRoIDI2OTQiIGQ9Ik03My40OTMgMTcuNjQ0aC0zLjE5NWwtLjEyNi0xLjE3NGExMi40MyAxMi40MyAwIDAxLTEuMTg1Ljk2OGMtMS40MS45LTQuNDU5Ljg3My01Ljc1Ny0xLjIzNWEzLjQ0NSAzLjQ0NSAwIDAxMi4zMjktNS4yMjhjMS4wNjktLjI1OCAyLjE3MS0uMzg0IDMuMjU3LS41Ny4wOTItLjAxNi4xODMtLjAzMy4yNzUtLjA0N2EuODA5LjgwOSAwIDAwLjc3MS0uNTg3IDEuMDE4IDEuMDE4IDAgMDAtLjI5NS0xLjAyMyAyLjA3MyAyLjA3MyAwIDAwLTIuMDg1LS40MjggMS44MTEgMS44MTEgMCAwMC0xLjMzOCAxLjM0NWMtLjAxNi4wNS0uMDEzLjEwNi0uMDI2LjE1N2ExLjE0MiAxLjE0MiAwIDAxLS4wNjMuMTQzbC0xLjU0Ny0uM2MtLjUxNy0uMS0xLjAxMS0uMjA5LTEuNTQ2LS4zMjFhMy42OSAzLjY5IDAgMDEuODU5LTIuMDc1IDQuNzg5IDQuNzg5IDAgMDEyLjgyMy0xLjY3OCA3LjIzIDcuMjMgMCAwMTQuMTIyLjI2NCAzLjkgMy45IDAgMDEyLjYyOSAzLjc4MWMuMDU5IDEuNjQ4LjAxIDMuMy4wMjQgNC45NS4wMSAxLjAwNy4wNDggMi4wMTYuMDc0IDMuMDU4em0tMy42MS01LjE3NmMtLjQyMy4wNjMtLjgyLjEtMS4yMDcuMTg1YTE0LjY4OCAxNC42ODggMCAwMC0xLjgzNy40NjhjLS40NDkuMTYxLS41NTcuNi0uNTQ4IDEuMDU5YTEuMTMxIDEuMTMxIDAgMDAuNTg1IDEuMDIxIDIuMjM1IDIuMjM1IDAgMDAyLjY1OC0uNzE5IDMuMTc4IDMuMTc4IDAgMDAuMzQ5LTIuMDEzeiIgZmlsbD0iIzAwOGQ3MSIvPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCAyNjk1IiBkPSJNOTguNTA5IDE3LjYzOWgtMy4ybC0uMTI1LTEuMjI4YS44NjIuODYyIDAgMDAtLjE1NC4xMjljLTEuMzQ1IDEuOTM0LTQuOTE4IDEuODY5LTYuNDE3LjE1OGEzLjQyMyAzLjQyMyAwIDAxMS40NTctNS41NTQgMjkuNzI0IDI5LjcyNCAwIDAxMy4yMzYtLjY1NmMuMjc0LS4wNTMuNTUzLS4wODEuODI2LS4xMzhhLjg4OC44ODggMCAwMC40OS0xLjU2MyAyLjAyNiAyLjAyNiAwIDAwLTIuMDMxLS40ODYgMS44IDEuOCAwIDAwLTEuNDExIDEuMzE2Yy0uMDM0LjEtLjA1LjItLjA4Ni4zNTlsLTMuMTIzLS42MjlhMy45MzEgMy45MzEgMCAwMTEuOTU0LTMuMDM1IDYuNTI3IDYuNTI3IDAgMDE2LjM0My0uMjI0QTMuNjc1IDMuNjc1IDAgMDE5OC40IDkuNDk3Yy4wNjQgMS41ODEuMDIxIDMuMTY3LjAzNyA0Ljc1MS4wMTYgMS4xMTIuMDQ4IDIuMjMuMDcyIDMuMzkxem0tMy41NDUtNS4xODJjLS44LjEyNS0xLjUuMjEzLTIuMTg3LjM0OWEzLjU2MSAzLjU2MSAwIDAwLS45NjYuMzQgMS4wNDcgMS4wNDcgMCAwMC0uNSAxLjA5MiAxLjExNCAxLjExNCAwIDAwLjYzNS45OSAyLjEgMi4xIDAgMDAyLjg1My0xLjMgMTAuNzgyIDEwLjc4MiAwIDAwLjE2NS0xLjQ2OHoiIGZpbGw9IiMwMDhkNzEiLz48cGF0aCBkYXRhLW5hbWU9IlBhdGggMjY5NiIgZD0iTTMyLjM2NyA5LjU0NGwtMy4wNTguOTE4YTcuMDIzIDcuMDIzIDAgMDAtMS4wMDctMS4yMjcgMi42NTMgMi42NTMgMCAwMC00LjE0NyAxLjU3OCA0LjY0OSA0LjY0OSAwIDAwLS4wMDYgMS43NzMgMi41NjEgMi41NjEgMCAwMDIuMjIyIDIuMDUyIDIuNSAyLjUgMCAwMDIuODMtMS40NDRjLjA1My0uMS4yNDMtLjIyNi4zMy0uMi45NjkuMjc2IDEuOTMxLjU3OSAyLjk1Ni44OTRhNy43NzMgNy43NzMgMCAwMS0uMjguNzkyQTUuNTc2IDUuNTc2IDAgMDEyNi45NTQgMThhNi4yODcgNi4yODcgMCAxMS0uMTYzLTEyLjU2OSA1Ljc1MyA1Ljc1MyAwIDAxNC42MzggMi4wODUgNC42MjUgNC42MjUgMCAwMS45MzggMi4wMjh6IiBmaWxsPSIjMGQxMTM2Ii8+PHBhdGggZGF0YS1uYW1lPSJQYXRoIDI2OTciIGQ9Ik03NS45NDcgNS43OTJoOS42NzRjLjAwNi4xMjYuMDE4LjI1Mi4wMTguMzc5IDAgLjYzOS0uMDM4IDEuMjgxLjAxMyAxLjkxNmExLjQyNCAxLjQyNCAwIDAxLS40ODMgMS4xODVjLTEuNTcyIDEuNjI3LTMuMTIzIDMuMjc0LTQuNjgxIDQuOTE0LS4wODguMDkzLS4xNjkuMTkyLS4zMDcuMzUxSDg1Ljd2My4xaC05LjljLS4wMS0uMTUtLjAyNi0uMjkxLS4wMjYtLjQzMiAwLS43MzIuMDIyLTEuNDY1LS4wMS0yLjJhMS4yNDEgMS4yNDEgMCAwMS40LS45ODNjMS41MjYtMS42IDMuMDM2LTMuMjA5IDQuNTUxLTQuODE3LjA4LS4wODUuMTU1LS4xNzUuMjc5LS4zMTdoLTUuMDUzeiIgZmlsbD0iIzAwOGQ3MSIvPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCAyNjk4IiBkPSJNMTQuNDg1IDE3LjYyNlY1LjgwNWgzLjU2N3YxMS44MjF6IiBmaWxsPSIjMGQxMTM2Ii8+PHBhdGggZGF0YS1uYW1lPSJQYXRoIDI2OTkiIGQ9Ik0xOC4zODYgMi4xMzhhMi4xIDIuMSAwIDAxLTIuMTQ4IDIuMSAyLjEzOSAyLjEzOSAwIDAxLTIuMDc4LTIuMTRBMi4xNDEgMi4xNDEgMCAwMTE2LjI4Ni4wMDVhMi4wODIgMi4wODIgMCAwMTIuMSAyLjEzM3oiIGZpbGw9IiMwMDhkNzEiLz48L2c+PC9zdmc+" class="d-inline-block align-top" width="40" alt="" />
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" onclick="jumpTo('home')">Offer</a>	
+				</li>
+				<li class="nav-item">
+                    <a class="nav-link" onclick="jumpTo('about')">
+                        <i class="fa fa-question-circle"></i>
+                        Need Help
+                    </a>
+				</li>
+				<li class="nav-item">
+					<button class="success">Join</button>
+				</li>
+				<!-- <li class="nav-item">
+					<a class="nav-link" onclick="jumpTo('contact')">CONTACTO</a>
+				</li> -->
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container-fluid" id="content-full">
+		<div class="row head-image" id="home">
+			<div class="col-12 d-flex align-items-center justify-content-center">
+				<div class="p-lg-5 p-4 text-center">
+					<h1 class="mb-3">
+                        Groceries Delivered in 90 Minute
+                    </h1>
+                    <span class="mb-5">Get your healthy foods & snacks delivered at your doorsteps all day everyday</span>
+                    
+                    <div class="searchbox d-flex align-items-center">
+                        <input placeholder="Buscar productos" />
+                        <button class="success">Buscar</button>
+                    </div>
+				</div>
+			</div>
+        </div>
+        <div class="row p-3 py-5 bg-white">
+            <div id="recipeCarousel" class="carousel slide my-3" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="col-4">
+                            <a href="#"><img src="https://shop.redq.now.sh/_next/static/images/offer-1-1f7a4c9ea0ba5a216bc7af1f60d044e0.png" class="img-fluid"></a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-4">
+                            <a href="#"><img src="https://shop.redq.now.sh/_next/static/images/offer-2-90d3534e1ad62a8b8a977f1290e61e9f.png" class="img-fluid"></a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-4">
+                            <a href="#"><img src="https://shop.redq.now.sh/_next/static/images/offer-3-2f8285b13bef950f843cb4147666af6e.png" class="img-fluid"></a>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+		<div class="row" id="products">
+            <div class="col-2 categories">
+                <ul class="categories-menu">
+                    <li>
+                        <i class="fa fa-carrot"></i>
+                        Frutas y vegetales
+                    </li>
+                    <li>
+                        <i class="fa fa-bacon"></i>
+                        Carnes
+                    </li>
+                    <li>
+                        <i class="fa fa-cookie-bite"></i>
+                        Snacks
+                    </li>
+                    <li>
+                        <i class="fa fa-mug-hot"></i>
+                        Breakfast
+                    </li>
+                </ul>
+            </div>
+			<div class="products col-10 pt-5">
+
+				<div class="row px-3">
+
+					<div class="col-12 col-lg-3 col-sm-6 mb-3 mb-md-0">
+						<div class="row px-3">
+							<div class="col-12 product-item px-0 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300" data-toggle="modal" data-target="#product-modal">
+                                <span class="badge badge-discount">50%</span>
+								<img src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614569/pickbazar/grocery/strawberry_d4lzfz.jpg" class="w-100" />
+								<div class="info px-3">
+									<p class="item-name mb-3 d-block">Fresa</p>
+									<p class="item-description">1 lb</p>
+								</div>
+								<div class="bottom d-flex flex-column align-items-center justify-content-around mt-4 px-3 pb-2">
+                                    <div class="text-left w-100">
+                                        <span class="item-discount-price">$5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between w-100">
+                                        <span class="item-price">$2.5</span>
+                                        <button class="lil transparent">
+                                            <i class="fa fa-shopping-cart mr-3"></i>
+                                            Añadir
+                                        </button>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-lg-3 col-sm-6 mb-3 mb-md-0">
+						<div class="row px-3">
+							<div class="col-12 product-item px-0 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300" data-toggle="modal" data-target="#product-modal">
+                                <span class="badge badge-discount">50%</span>
+								<img src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614570/pickbazar/grocery/blueberries_relyfn.jpg" class="w-100" />
+								<div class="info px-3">
+									<p class="item-name mb-3 d-block">Mora</p>
+									<p class="item-description">1 lb</p>
+								</div>
+								<div class="bottom d-flex flex-column align-items-center justify-content-around mt-4 px-3 pb-2">
+                                    <div class="text-left w-100">
+                                        <span class="item-discount-price">$5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between w-100">
+                                        <span class="item-price">$2.5</span>
+                                        <button class="lil transparent">
+                                            <i class="fa fa-shopping-cart mr-3"></i>
+                                            Añadir
+                                        </button>
+                                    </div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                    
+                    <div class="col-12 col-lg-3 col-sm-6 mb-3 mb-md-0">
+						<div class="row px-3">
+							<div class="col-12 product-item px-0 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300" data-toggle="modal" data-target="#product-modal">
+                                <span class="badge badge-discount">50%</span>
+								<img src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614568/pickbazar/grocery/clementines_h74qrp.jpg" class="w-100" />
+								<div class="info px-3">
+									<p class="item-name mb-3 d-block">Uchuva</p>
+									<p class="item-description">1 lb</p>
+								</div>
+								<div class="bottom d-flex flex-column align-items-center justify-content-around mt-4 px-3 pb-2">
+                                    <div class="text-left w-100">
+                                        <span class="item-discount-price">$5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between w-100">
+                                        <span class="item-price">$2.5</span>
+                                        <button class="lil transparent">
+                                            <i class="fa fa-shopping-cart mr-3"></i>
+                                            Añadir
+                                        </button>
+                                    </div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                    
+                    <div class="col-12 col-lg-3 col-sm-6 mb-3 mb-md-0">
+						<div class="row px-3">
+							<div class="col-12 product-item px-0 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300" data-toggle="modal" data-target="#product-modal">
+                                <span class="badge badge-discount">50%</span>
+								<img src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614569/pickbazar/grocery/Apples_dmwvrq.jpg" class="w-100" />
+								<div class="info px-3">
+									<p class="item-name mb-3 d-block">Manzana</p>
+									<p class="item-description">1 lb</p>
+								</div>
+								<div class="bottom d-flex flex-column align-items-center justify-content-around mt-4 px-3 pb-2">
+                                    <div class="text-left w-100">
+                                        <span class="item-discount-price">$5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between w-100">
+                                        <span class="item-price">$2.5</span>
+                                        <button class="lil transparent">
+                                            <i class="fa fa-shopping-cart mr-3"></i>
+                                            Añadir
+                                        </button>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+    </div>
+    
+    <button class="success cart-float-btn d-flex flex-column align-items-center" onclick="toggleSideBar(true)">
+        <span class="cart-items">
+            <i class="fa fa-shopping-cart"></i>
+            1 item
+        </span>
+        <span class="cart-price">
+            $6.48
+        </span>
+    </button>
+    
+    <div id="cart-side-bar" class="col-4" data-toggle="false">
+        <div class="cart-side-bar-header d-flex alignt-items-center justify-content-between">
+            <div class="side-bar-items">
+                <i class="fa fa-shopping-cart"></i>
+                1 item
+            </div>
+            <i class="fa fa-times dismiss-side-bar" onclick="toggleSideBar(false)"></i>
+        </div>
+
+        <div class="cart-side-bar-body">
+            <div class="side-product d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center justify-content-start">
+                    <div class="side-product-counter d-flex flex-column mr-3 ">
+                        <span><i class="fa fa-plus"></i></span>
+                        <span>1</span>
+                        <span><i class="fa fa-minus"></i></span>
+                    </div>
+                    <img 
+                        class="side-product-img mr-4"
+                        src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614569/pickbazar/grocery/strawberry_d4lzfz.jpg">
+                    <div class="d-flex flex-column">
+                        <span class="side-product-name">Fresa</span>
+                        <span class="side-product-price">$2.5</span>
+                        <span class="side-product-description">1 X 1lb</span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <span class="side-product-total mr-3">$7.20</span>
+                    <i class="fa fa-times dismiss-product"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-side-bar-footer text-center">
+            <p>Coupon Applied
+                <span class="side-bar-footer coupon">
+                    SUMMER10
+                </span>
+            </p>
+            <button class="success checkout-btn">
+                Checkout
+                <span class="checkout-btn-total">$8.73</span>
+            </button>
+        </div>
+
+    </div>
+	
+
+	<div class="modal fade" id="product-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<i class="fa fa-times dismiss-modal" data-dismiss="modal"></i>
+					<div class="row align-items-center">
+						<div class="col-md-6 col-12 px-5 border-right">
+                            <span class="badge badge-discount">50%</span>
+							<img src="https://res.cloudinary.com/redq-inc/image/upload/v1589614569/pickbazar/grocery/strawberry_d4lzfz.jpg" class="w-100">
+						</div>
+						<div class="col-md-6 col-12 px-5">
+                            <div class="product-item in-modal">
+                                <div class="d-flex align-items-center justify-content-start mb-2">
+                                    <h3 class="mr-3 mt-3 mt-3">Fresa</h3>
+                                    <span class="item-discount-price mr-3 mt-3">$5</span>
+                                    <span class="item-price mt-3">$2.5</span>
+                                </div>
+                                <p class="item-description">1 lb</p>
+                                <p class="item-info my-5">
+                                    The garden strawberry is a widely grown hybrid species of the genus Fragaria, collectively known as the strawberries,
+                                    which are cultivated worldwide for their fruit. The fruit is widely appreciated for its characteristic aroma, bright red color,
+                                    juicy texture, and sweetness.
+                                </p>
+                                <button class="transparent mb-2" onclick="$('#maracuya-modal').modal('hide');">
+                                    <i class="fa fa-shopping-cart mr-3"></i>
+                                    Añadir
+                                </button>
+                                <div class="item-tags mt-4">
+                                    <span class="badge badge-tag">Frutas</span>
+                                    <span class="badge badge-tag">Vegetales</span>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
+
+	<!-- JQUERY -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<!-- BOOTSTRAP JS -->
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<!-- MODERNIZR -->
+	<script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
+	<!-- APPEAR -->
+	<script type="text/javascript" src="{% static 'js/jquery.appear.js' %}"></script>
+	<!-- EASING -->
+	<script type="text/javascript" src="{% static 'js/jquery.easing.min.js' %}"></script>
+	<!-- FONTAWESOME -->
+	<script src="https://kit.fontawesome.com/36151c3707.js" crossorigin="anonymous"></script>
+	<!-- SWAL2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<!-- OWN JS -->
+	<script src="{% static 'js/main.js' %}"></script>
+
+
+	<script type="text/javascript">
+		
+	    // Sticky
+        //-----------------------------------------------
+        $(window).scroll(function(){
+            var sticky = $('#navbar'),
+                scroll = $(window).scrollTop();
+        
+            if (scroll >= 300) sticky.addClass('fixed');
+            else sticky.removeClass('fixed');
+        });
+
+	</script>
+
 </body>
 </html>

@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from empresas.views import TestView
-
+from empresas.views import TestView, Test2View
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
 
     path('jet/', include('jet.urls', 'jet')),
     path('', TestView.as_view(),name='test'),
+    path('prueba', Test2View.as_view(),name='prueba'),
     path('admin/', admin.site.urls),
-]
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+              + static(settings.MEDIA_URL,
+                       document_root=settings.MEDIA_ROOT)
