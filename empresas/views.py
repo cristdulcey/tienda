@@ -2,11 +2,15 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.utils import timezone
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+
+from productos.models import Product
 
 
-class TestView(TemplateView):
+class HomeView(ListView):
     template_name = 'index.html'
+    model = Product
+
 
 class Test2View(TemplateView):
     template_name = 'checkout.html'

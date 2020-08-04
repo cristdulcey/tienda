@@ -54,7 +54,7 @@ class AdminProduct(admin.ModelAdmin):
     inlines = [OrderProductInline,]
     actions = ("set_value_product",)
     ordering = ("-name",)
-    readonly_fields = ("quantity",)
+   # readonly_fields = ("quantity",)
     def set_value_product(self,request,queryset):
         for a in queryset:
             a.value = 1000

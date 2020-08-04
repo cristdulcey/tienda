@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'compras',
     'empresas',
     'productos',
+    'geoposition',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +119,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyCC7nxuwQXGq2vlbSIGNY4miTjW9bZpjmc'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
