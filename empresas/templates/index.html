@@ -56,15 +56,23 @@
 		<div class="row head-image" id="home">
 			<div class="col-12 d-flex align-items-center justify-content-center">
 				<div class="p-lg-5 p-4 text-center">
+                    <form method="get" >
 					<h1 class="mb-3">
                         Groceries Delivered in 90 Minute
                     </h1>
                     <span class="mb-5">Get your healthy foods & snacks delivered at your doorsteps all day everyday</span>
                     
                     <div class="searchbox d-flex align-items-center">
-                        <input placeholder="Buscar productos" />
-                        <button class="success">Buscar</button>
+                        <input placeholder="Buscar productos" name="search" value="{{ request.GET.search }}" />
+                        <button type="submit" class="success" >Buscar</button>
                     </div>
+                        {% if cat %}
+                         <div style="display: none" class="searchbox d-flex align-items-center">
+                        <input style="display: none" placeholder="Buscar productos" name="category" value="{{ cat }}" />
+
+                    </div>
+                        {% endif %}
+                    </form>
 				</div>
 			</div>
         </div>
@@ -101,11 +109,18 @@
 		<div class="row" id="products">
             <div class="col-2 categories">
                 <ul class="categories-menu">
+
+                    {% for c in category %}
+                    <a href="{% url 'home' %}?category={{ c.id }}{% if sea %}&search={{ sea }}{% endif %}">
+
                     <li>
                         <i class="fa fa-carrot"></i>
-                        Frutas y vegetales
+                        {{ c.name }}
+
                     </li>
-                    <li>
+                    </a>
+                    {% endfor %}
+                    <!--<li>
                         <i class="fa fa-bacon"></i>
                         Carnes
                     </li>
@@ -116,7 +131,7 @@
                     <li>
                         <i class="fa fa-mug-hot"></i>
                         Breakfast
-                    </li>
+                    </li>-->
                 </ul>
             </div>
 			<div class="products col-10 pt-5">
@@ -128,7 +143,7 @@
 					<div class="col-12 col-lg-3 col-sm-6 mb-3 mb-md-0">
 						<div class="row px-3">
 							<div class="col-12 product-item px-0 object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300" data-toggle="modal" data-target="#product-modal">
-                                <span class="badge badge-discount">50%</span>
+                                <span class="badge badge-discount">{{ p.discount }} %</span>
 								<img src="{{ p.photo.url }}" class="w-100" />
 								<div class="info px-3">
 									<p class="item-name mb-3 d-block">{{ p.name }}</p>
@@ -136,7 +151,7 @@
 								</div>
 								<div class="bottom d-flex flex-column align-items-center justify-content-around mt-4 px-3 pb-2">
                                     <div class="text-left w-100">
-                                        <span class="item-discount-price">{{ p.discount }}</span>
+                                        <span class="item-discount-price"></span>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between w-100">
                                         <span class="item-price">{{ p.value }}</span>
@@ -296,7 +311,9 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<i class="fa fa-times dismiss-modal" data-dismiss="modal"></i>
-					<div class="row align-items-center">
+
+
+                    <div class="row align-items-center">
 						<div class="col-md-6 col-12 px-5 border-right">
                             <span class="badge badge-discount">50%</span>
 							<img src="https://res.cloudinary.com/redq-inc/image/upload/v1589614569/pickbazar/grocery/strawberry_d4lzfz.jpg" class="w-100">
@@ -325,6 +342,7 @@
                             </div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
