@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from geoposition.fields import GeopositionField
+
+
 class Shop(models.Model):
     name=models.CharField(max_length=255)
     nit=models.BigIntegerField()
@@ -10,6 +13,7 @@ class Shop(models.Model):
     logo=models.ImageField(upload_to="shop_image", null=True, blank=True)
     description=models.TextField(max_length=255)
     state=models.BooleanField(default=True)
+    position = GeopositionField()
 
     class Meta:
         verbose_name="Tienda"

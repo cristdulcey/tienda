@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from empresas.views import TestView, Test2View
+from empresas.views import Test2View, HomeView
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
 
     path('jet/', include('jet.urls', 'jet')),
-    path('', TestView.as_view(),name='test'),
+    path('', HomeView.as_view(),name='home'),
     path('prueba', Test2View.as_view(),name='prueba'),
     path('admin/', admin.site.urls),
 

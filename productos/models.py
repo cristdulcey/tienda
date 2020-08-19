@@ -6,7 +6,7 @@ from empresas.models import Shop
 
 class Category (models.Model):
     name = models.CharField(max_length=50)
-    icon = models.ImageField(upload_to = "image_categories")
+    icon = models.ImageField(upload_to = "image_categories", null=True, blank=True)
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=255, blank=True, unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
