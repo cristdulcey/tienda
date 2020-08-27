@@ -16,15 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from empresas.views import Test2View, HomeView
+from empresas.views import Test2View, HomeView, Details, add_product_cart_view
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
 
     path('jet/', include('jet.urls', 'jet')),
     path('', HomeView.as_view(),name='home'),
-    path('prueba', Test2View.as_view(),name='prueba'),
+    #path('prueba', Test2View.as_view(),name='prueba'),
+    path('detail/<int:pk>/', Details.as_view(),name='detalle'),
+    path('add-product/', add_product_cart_view,name='add_product'),
     path('admin/', admin.site.urls),
+    path('buy/<int:pk>/', Test2View.as_view(),name='compra'),
+
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL,

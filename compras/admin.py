@@ -43,8 +43,8 @@ class AdminNotification(admin.ModelAdmin):
 
 @admin.register(OrderProduct)
 class AdminOrderProduct(admin.ModelAdmin):
-    list_display = ("quantity", "value_unit","value_total")
-    list_display_links = ("quantity", "value_unit","value_total")
+    list_display = ("product","quantity", "value_unit","value_total")
+    list_display_links = ("product","quantity", "value_unit","value_total")
     raw_id_fields = ("order", "product")
     search_fields = ("product__name", "order__id")
     

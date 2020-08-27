@@ -58,4 +58,4 @@ class OrderProduct (models.Model):
         verbose_name_plural = "Ordenes productos"
 
     def __str__(self):
-        return self.quantity
+        return "{}".format(self.product)
