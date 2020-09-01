@@ -1,0 +1,37 @@
+
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body" id="product-modal-body">
+					<i class="fa fa-times dismiss-modal" data-dismiss="modal"></i>
+
+                    <div class="row align-items-center">
+						<div class="col-md-6 col-12 px-5 border-right">
+                            <span class="badge badge-discount">{{ object.discount }} %</span>
+							<img src="{{ object.photo.url }}" class="w-100">
+						</div>
+						<div class="col-md-6 col-12 px-5">
+                            <div class="product-item in-modal">
+                                <div class="d-flex align-items-center justify-content-start mb-2">
+                                    <h3 class="mr-3 mt-3 mt-3">{{ object.name }}</h3>
+                                    <span class="item-discount-price mr-3 mt-3"></span>
+                                    <span class="item-price mt-3">${{ object.value }}</span>
+                                </div>
+                                <p class="item-description">{{ object.unidades }}</p>
+                                <p class="item-info my-5">
+                                            {{ object.description }}
+                                </p>
+                                <button class="transparent mb-2" onclick="$('#maracuya-modal').modal('hide');">
+                                    <i class="fa fa-shopping-cart mr-3"></i>
+                                    Añadir
+                                </button>
+                                <div class="item-tags mt-4">
+                                    <span class="badge badge-tag">Categoria: {{ object.category }}</span>
+
+                                </div>
+                            </div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
