@@ -1,15 +1,16 @@
-from basicauth.decorators import basic_auth_required
 from django.db.models import Q
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.decorators import authentication_classes, api_view
 
-from compras.models import Order
+from compras.models import Order, OrderProduct
 from empresas.models import Client
 from productos.models import Product, Category
 
@@ -60,22 +61,58 @@ class Test2View(DetailView):
     template_name = 'compra.html'
     model = Product
 
-#@basic_auth_required
 @csrf_exempt
-def add_product_cart_view(request):
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication,])
+def add_product_cart_view(request,format=None):
     pk = request.POST.get("id_product")
-    print(request.user)
+    quantity = request.POST.get("quantity",1)
+    print(pk,quantity)
+    product = get_object_or_404(Product,id=pk)
     if request.user.is_authenticated:
-
         client = Client.objects.filter(user=request.user)
-        print(client)
+        if client: # si existe el cliente
+            order = Order.objects.filter(client=client.first(), state=False) # buscar una orden con ese cliente y que no este terminada
+            if order: # si existe la orden del cliente y que no este terminada
+                order_aux = order.first() # asignamos a order_aux el primer elemento del array de order
+                order_product, create = OrderProduct.objects.get_or_create( # busca si existe un OrderProduct con esa orden y con ese producto
+                    order=order_aux,
+                    product=product,
+                    defaults={ # si no existe se crea con estas opciones por defecto
+                        "quantity": quantity,
+                        "value_unit": product.value,
+                        "value_total": (product.value * quantity)
+                    }
+                )
+                if not create:
+                    # si no se crea el objeto OrderProduct entra aqui
+                    order_product.quantity = int(quantity)
+                    order_product.value_unit = int(product.value)
+                    order_product.value_total = int(int(product.value) * int(quantity))
+                    order_product.save() # guardamos las modificaciones.
+                    return JsonResponse({
+                        'msg': 'the product has been updated to your cart',
+                        'items': pk
+                    })
+                else:
+                    return JsonResponse({
+                        'msg': 'the product has been added to your cart',
+                        'items': pk
+                    })
+            else:
 
-        if client:
-            order = Order.objects.filter(client = client, state=False)
-        return JsonResponse({
-            'msg': 'the product has been added to your cart',
-            'items': pk
-        })
+                order_aux = Order.objects.create(client=client.first(),state=False,value=0)
+                order_product = OrderProduct.objects.create(
+                    order=order_aux,
+                    product=product,
+                    quantity=quantity,
+                    value_unit=product.value,
+                    value_total=(product.value * quantity)
+                )
+                return JsonResponse({
+                    'msg': 'the product has been added to your cart',
+                    'items': pk
+                })
     else:
         return JsonResponse({
             'msg': 'No existe el cliente',

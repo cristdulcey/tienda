@@ -21,7 +21,7 @@ class Cupon(models.Model):
         return self.name
 
 class Order(models.Model):
-    date=models.DateField(auto_now=True, auto_now_add=False)
+    date=models.DateField(auto_now_add=True)
     value=models.IntegerField()
     state=models.BooleanField(default=True)
     client=models.ForeignKey(Client, on_delete=models.CASCADE)
@@ -31,7 +31,7 @@ class Order(models.Model):
         verbose_name_plural = "Ordenes"
 
     def __str__(self):
-        return "{}".format(self.client)
+        return "{}".format(self.pk)
 
 class Notification (models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)

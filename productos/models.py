@@ -39,7 +39,7 @@ class Product (models.Model):
     description = models.TextField(blank=True)
     value = models.IntegerField()
     quantity = models.IntegerField()
-    discount = models.IntegerField(blank=True)
+    discount = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     unidades = models.ForeignKey(Unit, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
